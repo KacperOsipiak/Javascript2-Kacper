@@ -4,7 +4,7 @@
 // Bonus: Schrijf getKlantniveau(bedrag) en toon het niveau erbij
 function calculateTotal(bedrag, korting) {
   // Bereken het totaalbedrag na korting
-  const totaal = bedrag - (bedrag * (korting / 100));
+ return bedrag - (bedrag * (korting / 100));
 }
 
 const form = document.getElementById("discount-form");
