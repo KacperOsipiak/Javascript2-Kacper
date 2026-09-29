@@ -4,29 +4,60 @@ const users = [
   { name: 'Tom Visser',    email: 'tom@bedrijf.nl',  role: 'user',  active: false },
   { name: 'Sara Meijer',   email: 'sara@bedrijf.nl', role: 'admin', active: true  },
 ];
-
+ 
 let filter = 'all';
-
+ 
 const showUsers = (users) => {
-  // Gebruik destructuring voor elke user: const { name, email, role, active } = user
-  // Toon elke user als een <article> in #users
+  const container = document.querySelector('#users');
+  container.innerHTML = '';
+ 
+  users.forEach((user) => {
+    const { name, email, role, active } = user;
+ 
+    const article = document.createElement('article');
+    article.innerHTML = `
+      <h3>${name}</h3>
+      <p>${email}</p>
+      <p>Rol: ${role}</p>
+      <p>Status: ${active ? 'Actief' : 'Inactief'}</p>
+    `;
+    container.appendChild(article);
+  });
 };
-
+ 
 const filterUsers = () => {
-  // Als filter 'admin' is, toon alleen gebruikers met role === 'admin'
-  // Anders toon je alle gebruikers
-  // Roep showUsers() aan met de gefilterde lijst
+  const gefilterd = filter === 'admin'
+    ? users.filter(({ role }) => role === 'admin')
+    : users;
+ 
+  showUsers(gefilterd);
 };
-
-// Maak een eventlistener voor de #filter-admin button
-// Zet filter op 'admin' en roep filterUsers() aan
-
-// Maak een eventlistener voor de #filter-all button
-// Zet filter op 'all' en roep filterUsers() aan
-
-// Maak een eventlistener voor het #user-form submit event
-// Lees naam, email en role uit de invoervelden
-// Maak een nieuw user object aan met spread op een default object
-// Voeg toe aan de array en roep filterUsers() aan
-
+ 
+document.querySelector('#filter-admin').addEventListener('click', () => {
+  filter = 'admin';
+  filterUsers();
+});
+ 
+document.querySelector('#filter-all').addEventListener('click', () => {
+  filter = 'all';
+  filterUsers();
+});
+ 
+document.querySelector('#user-form').addEventListener('submit', (event) => {
+  event.preventDefault();
+ 
+  const name = document.querySelector('#name').value;
+  const email = document.querySelector('#email').value;
+  const role = document.querySelector('#role').value;
+ 
+  const defaultUser = { name: '', email: '', role: 'user', active: true };
+  const newUser = { ...defaultUser, name, email, role };
+ 
+  users.push(newUser);
+  filterUsers();
+ 
+  event.target.reset();
+});
+ 
 filterUsers();
+ 
