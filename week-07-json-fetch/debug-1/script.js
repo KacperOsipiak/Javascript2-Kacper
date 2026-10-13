@@ -1,7 +1,7 @@
-// Fout gevonden: _______________
-// Oplossing: _______________
+// Fout gevonden: kon geen json bestand vinden vandwege new.json
+// Oplossing: S toevoegen 
 
-fetch('./new.json')
+fetch('./news.json')
   .then(r => r.json())
   .then(messages => {
     const list = document.querySelector('#results');
