@@ -2,7 +2,7 @@
 // Oplossing: _______________
 
 fetch('./users')
-  .then(r => r.json())
+  .then(r => users.json())
   .then(users => {
     const list = document.querySelector('#result');
     users.forEach(user => {

@@ -2,7 +2,7 @@
 // Oplossing: _______________
 
 fetch('./products.json')
-  .then(r => r.json());
+  .then(r => products.json())
   .then(products => {
     const list = document.querySelector('#results');
     products.forEach(product => {
