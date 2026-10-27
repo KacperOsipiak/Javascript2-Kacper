@@ -1,1 +1,28 @@
-[]
+
+    [
+  {
+    "title": "The Dark Knight",
+    "director": "Christopher Nolan",
+    "year": 2008,
+    "genre": "Actie"
+  },
+  {
+    "title": "Avatar",
+    "director": "James Cameron",
+    "year": 2009,
+    "genre": "Sci-Fi"
+  },
+  {
+    "title": "Titanic",
+    "director": "James Cameron",
+    "year": 1997,
+    "genre": "Drama"
+  },
+  {
+    "title": "John Wick",
+    "director": "Chad Stahelski",
+    "year": 2014,
+    "genre": "Actie"
+  }
+]
+
