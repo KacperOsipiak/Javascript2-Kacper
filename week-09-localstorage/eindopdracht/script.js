@@ -14,8 +14,33 @@ const showItems = (items) => {
 
   // Voeg daarna een click event listener toe aan elke .favorite-btn
   // De index i vertelt je welke Pokémon bij welke knop hoort: items[i].name
+  const results = document.querySelector('#results');
+
+  results.innerHTML = items
+    .map(
+      pokemon => `
+      <article>
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png" alt="${pokemon.name}">
+        <h3>${pokemon.name}</h3>
+        <button class="favorite-btn">
+          ${
+            favorites.includes(pokemon.name)
+              ? 'Favoriet'
+              : 'Toevoegen aan favorieten'
+          }
+        </button>
+      </article>
+    `
+    )
+    .join('');
   document.querySelectorAll('.favorite-btn').forEach((btn, i) => {
     btn.addEventListener('click', () => {
+      if (!favorites.includes(items[i].name)) {
+        favorites.push(items[i].name);
+      }
+
+      saveFavorites();
+      showItems(items);
       // Voeg items[i].name toe aan favorites
       // Roep saveFavorites() aan
       // Roep showItems(items) opnieuw aan
@@ -36,7 +61,17 @@ fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
     document.querySelector('#loading').textContent = 'Er is iets misgegaan.';
     console.error('Fout:', error);
   });
+document.querySelector('#show-all').addEventListener('click', () => {
+  showItems(allPokemon);
+});
 
+document.querySelector('#show-favorites').addEventListener('click', () => {
+  const favoritePokemon = allPokemon.filter(pokemon =>
+    favorites.includes(pokemon.name)
+  );
+
+  showItems(favoritePokemon);
+});
 // Maak een eventlistener voor de #show-all button
 // Roep showItems() aan met allPokemon
 
